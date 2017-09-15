@@ -1,0 +1,256 @@
+\documentclass{llncs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% package sillabazione italiana e uso lettere accentate
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{url}
+\usepackage{xspace}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{manifest}
+
+\makeatother
+
+
+%%%%%%%
+ \newif\ifpdf
+ \ifx\pdfoutput\undefined
+ \pdffalse % we are not running PDFLaTeX
+ \else
+ \pdfoutput=1 % we are running PDFLaTeX
+ \pdftrue
+ \fi
+%%%%%%%
+ \ifpdf
+ \usepackage[pdftex]{graphicx}
+ \else
+ \usepackage{graphicx}
+ \fi
+%%%%%%%%%%%%%%%
+ \ifpdf
+ \DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+ \else
+ \DeclareGraphicsExtensions{.eps, .jpg}
+ \fi
+%%%%%%%%%%%%%%%
+
+\newcommand{\java}{\textsf{Java}}
+\newcommand{\contact}{\emph{Contact}}
+\newcommand{\corecl}{\texttt{corecl}}
+\newcommand{\medcl}{\texttt{medcl}}
+\newcommand{\msgcl}{\texttt{msgcl}}
+\newcommand{\android}{\texttt{Android}}
+\newcommand{\dsl}{\texttt{DSL}}
+\newcommand{\jazz}{\texttt{Jazz}}
+\newcommand{\rtc}{\texttt{RTC}}
+\newcommand{\ide}{\texttt{Contact-ide}}
+\newcommand{\xtext}{\texttt{XText}}
+\newcommand{\xpand}{\texttt{Xpand}}
+\newcommand{\xtend}{\texttt{Xtend}}
+\newcommand{\pojo}{\texttt{POJO}}
+\newcommand{\junit}{\texttt{JUnit}}
+
+\newcommand{\action}[1]{\texttt{#1}\xspace}
+\newcommand{\code}[1]{{\small{\texttt{#1}}}\xspace}
+\newcommand{\codescript}[1]{{\scriptsize{\texttt{#1}}}\xspace}
+
+% Cross-referencing
+\newcommand{\labelsec}[1]{\label{sec:#1}}
+\newcommand{\xs}[1]{\sectionname~\ref{sec:#1}}
+\newcommand{\xsp}[1]{\sectionname~\ref{sec:#1} \onpagename~\pageref{sec:#1}}
+\newcommand{\labelssec}[1]{\label{ssec:#1}}
+\newcommand{\xss}[1]{\subsectionname~\ref{ssec:#1}}
+\newcommand{\xssp}[1]{\subsectionname~\ref{ssec:#1} \onpagename~\pageref{ssec:#1}}
+\newcommand{\labelsssec}[1]{\label{sssec:#1}}
+\newcommand{\xsss}[1]{\subsectionname~\ref{sssec:#1}}
+\newcommand{\xsssp}[1]{\subsectionname~\ref{sssec:#1} \onpagename~\pageref{sssec:#1}}
+\newcommand{\labelfig}[1]{\label{fig:#1}}
+\newcommand{\xf}[1]{\figurename~\ref{fig:#1}}
+\newcommand{\xfp}[1]{\figurename~\ref{fig:#1} \onpagename~\pageref{fig:#1}}
+\newcommand{\labeltab}[1]{\label{tab:#1}}
+\newcommand{\xt}[1]{\tablename~\ref{tab:#1}}
+\newcommand{\xtp}[1]{\tablename~\ref{tab:#1} \onpagename~\pageref{tab:#1}}
+% Category Names
+\newcommand{\sectionname}{Section}
+\newcommand{\subsectionname}{Subsection}
+\newcommand{\sectionsname}{Sections}
+\newcommand{\subsectionsname}{Subsections}
+\newcommand{\secname}{\sectionname}
+\newcommand{\ssecname}{\subsectionname}
+\newcommand{\secsname}{\sectionsname}
+\newcommand{\ssecsname}{\subsectionsname}
+\newcommand{\onpagename}{on page}
+
+\newcommand{\xauthA}{Luca Pascucci }
+\newcommand{\xauthB}{Alessandro bagnoli}
+\newcommand{\xauthC}{NameC StudentC}
+\newcommand{\xfaculty}{II Faculty of Engineering}
+\newcommand{\xunibo}{Alma Mater Studiorum -- University of Bologna}
+\newcommand{\xaddrBO}{viale Risorgimento 2}
+\newcommand{\xaddrCE}{via Venezia 52}
+\newcommand{\xcityBO}{40136 Bologna, Italy}
+\newcommand{\xcityCE}{47023 Cesena, Italy}
+
+%
+% Comments
+%
+%%% \newcommand{\todo}[1]{\bf{TODO:}\emph{#1}}
+
+
+\begin{document}
+
+\title{Software Engineering\\
+ process report template}
+
+\author{\xauthA \and \xauthB}
+%%\author{\xauthA}
+
+\institute{%
+  \xunibo\\\xaddrCE, \xcityCE\\\email{\{nameA.studentA, nameB.studentB\}@studio.unibo.it}
+%%%  \xunibo\\\xaddrCE, \xcityCE\\\email\ nameA.studentA@studio.unibo.it
+}
+
+\maketitle
+
+%% \begin{abstract}
+%% \footnotesize
+%%This a Latex template to be used for the reports of Software Engineering.
+%%\keywords{Software engineering, managed software development, reports, ....}
+%%\end{abstract}
+
+%%% \sloppy
+
+%===========================================================================
+\section{Introduction}
+\labelsec{intro}
+%===========================================================================
+
+%===========================================================================
+\section{Vision}
+\labelsec{Vision}
+%===========================================================================
+
+%===========================================================================
+\section{Goals}
+\labelsec{Goals}
+%===========================================================================
+
+%===========================================================================
+\section{Requirements}
+\labelsec{Requirements}
+%===========================================================================
+
+ 
+%===========================================================================
+\section{Requirement analysis}
+\labelsec{ReqAnalysis}
+%===========================================================================
+\subsection{Use cases}
+\labelssec{UseCases}
+
+\subsection{Scenarios}
+\labelssec{Scenarios}
+
+\subsection{(Domain)model}
+
+\subsection{Test plan}
+
+%===========================================================================
+\section{Problem analysis}
+\labelsec{ProblemAnalysis}
+%===========================================================================
+\subsection{Logic architecture}
+\subsection{Abstraction gap}
+\subsection{Risk analysis}
+
+%===========================================================================
+\section{Work plan}
+\labelsec{wplan}
+%===========================================================================
+
+%===========================================================================
+\section{Project}
+\labelsec{Project}
+%===========================================================================
+
+\subsection{Structure}
+\subsection{Interaction}
+\subsection{Behavior}
+
+%===========================================================================
+\section{Implementation}
+\labelsec{Implementation}
+%===========================================================================
+
+%===========================================================================
+\section{Testing}
+\labelsec{testing}
+%===========================================================================
+
+%===========================================================================
+\section{Deployment}
+\labelsec{Deployment}
+%===========================================================================
+
+%===========================================================================
+\section{Maintenance}
+\labelsec{Maintenance}
+%===========================================================================
+\newpage
+See \cite{natMol09} until page 11 (\texttt{CMM}) and pages 96-105.
+
+%===========================================================================
+\section{Information about the author}
+\labelsec{Author}
+%===========================================================================
+
+\vskip.5cm
+%%% \begin{figure}
+\begin{tabular}{ | c |  }
+\hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  Photo of the author 
+  \\
+\hline
+   \includegraphics[scale = 0.7]{img/foto_autore.jpg}
+  \\
+\hline
+\end{tabular}
+
+
+%%% \begin{itemize}
+%%% \item Titolo di studio:\\ \\
+%%% \item Interessi particolari:\\ \\
+%%% \item Ha sostenuto fino ad oggi il seguente numero di esami:\\ \\
+%%% \item Deve ancora sostenere i seguenti esami del I anno:\\ \\
+%%% \item Prevede di svolgere un tirocinio presso:\\ \\
+%%% \item Prevede di laurearsi nella sessione:\\ \\
+%%% \item Intende proseguire gli studi per conseguire: \\  \\  \\
+%%%   	presso la sede universitaria di: \\ \\
+%%% \item Intende entrare subito nel mondo del lavoro presso : \\ \\
+%%% \end{itemize}
+
+ 
+\appendix
+
+
+\bibliographystyle{abbrv}
+\bibliography{biblio}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
