@@ -1,0 +1,12 @@
+syntax: glob
+.hgignore
+*.aux
+*.bbl
+*.blg
+*.log
+*.pdf
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.lol
