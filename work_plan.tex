@@ -1,15 +1,14 @@
 \section{Work plan}
 \labelsec{wplan}
-\textbf{DA SISTEMARE PER NOI - COPIATO ED INCOLLATO da BLSLogic}
-Our workplan is:
-\begin{itemize}
-	\item Define a more accurate domain model for input-output devices.
-	\item Define the classes involved in the Logic Architecture of the system by taking the Bridge Pattern as a reference point. More precisley:
-	\begin{itemize}
-		\item Define the properties of (a model for) the main system components and compare them with those of the available domain components.
-		\item If a system component (model) is different from an available domain component, define the Test Plans for that system components.
-		\item Define the Test Plans for the whole System.
-	\end{itemize}
-	\item Build and test the new system components (unit testing).
-	\item Build and test the system (integration testing).
-\end{itemize}
+The point is that we have to specify a model, so we must carefully understand the detail level of the specification.
+Our work plan is set as follows:
+\begin{enumerate}
+	\item find the main subsystems and define the system contexts;
+	\item define the structure of the events that can occur in the system;
+	\item define the structure of the messages exchanged by the actors;
+	\item define the main actors working in each context
+	\item define the type of the logical interaction among the actors;
+	\item define the logical behaviour of each actor according to interaction constraints.
+	\item build and test the new system components (unit testing).
+	\item build and test the system (integration testing).
+\end{enumerate}
