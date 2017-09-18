@@ -1,2 +1,10 @@
 \subsection{Logic architecture}
-//TODO inserire ddr
+The logic architecture of a (distributed) software system can be specified by a custom (domain specific) language. In this case scenario, \textit{qa} DSL has turned to be very helpful. The main aim of the custom language qa is to give more expressive power than UML for the definition of system models, both during the problem analysis phase and during the project phase. The language qa allows us to specify:
+\begin{itemize}
+	\item the main components (\textbf{QActor}) of a system software system
+	\item how the components are mapped into computational nodes (\textbf{Context})
+	\item how the components exchange information (using \textbf{Messages} and \textbf{Events})
+	\item how each component works (\textbf{behaviour})
+\end{itemize}
+Here is the logic architecture of the system described using qa language:
+\lstinputlisting{list/robotSystem.ddr}

@@ -4,6 +4,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
+\usepackage[final]{listings}
+\usepackage{color}
+\usepackage{caption}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{url}
@@ -39,6 +42,7 @@
 %%%%%%%%%%%%%%%
 
 \graphicspath{{img/}}
+\captionsetup[lstlisting]{position=bottom}
 
 \newcommand{\java}{\textsf{Java}}
 \newcommand{\contact}{\emph{Contact}}
@@ -102,6 +106,84 @@
 %
 %%% \newcommand{\todo}[1]{\bf{TODO:}\emph{#1}}
 
+\definecolor{keywords}{rgb}{0.5,0,0.35}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+
+\definecolor{dkgreen}{rgb}{0.4,0.4,0.4}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{dkgray}{rgb}{0.2,0.2,0.2}
+\definecolor{commentgray}{rgb}{0.6,0.6,0.6}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+% Define Language
+\lstdefinelanguage{qa}
+{
+	% list of keywords
+	morekeywords={
+		RobotSystem,
+		QActor,
+		Event,
+		Dispatch,
+		Context,
+		context,
+		EventHandler,
+		ip,
+		host,
+		port,
+		-httpserver,
+		for,
+		Plan,
+		normal,
+		actions,
+		println,
+		actorOp,
+		switchTo,
+		transition,
+		whenTime,
+		whenEvent,
+		onEvent,
+		reactive,
+		whenEnd,
+		whenTout,
+		or,
+		sound,
+		time,
+		file,
+		onMsg,
+		Rules,
+		Robot,
+		robotForward,
+		speed,
+		robotStop,
+		robotLeft,
+		robotRight
+	},
+	sensitive=true, % keywords are not case-sensitive
+	morecomment=[l]{//}, % l is for line comment
+	morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+	morestring=[b]" % defines that strings are enclosed in double quotes
+}
+
+\lstset{language=qa,
+	frame=single,
+	captionpos=b,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\fontsize{10}{10}\ttfamily},
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{keywords},
+	commentstyle=\color{greencomments},
+	stringstyle=\color{blue},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3,
+	frame=single,
+	rulecolor=\color{black}
+}
 
 \begin{document}
 

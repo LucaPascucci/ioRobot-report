@@ -1,0 +1,227 @@
+RobotSystem robotSystem
+                        
+Event cmd 			 : cmd(X)  //For start and stop from console
+Event reachedsensor  : reachedsensor(X) 
+Event obstacle 		 : obstacle(X)
+Event usercmd 		 : usercmd(robotgui(X))
+
+Event alarm          : alarm(X)
+Event sonar 		 : p(Distance, Angle) 
+
+Dispatch photograph  : ph(X)
+
+Context  ctxRadar      ip [ host="172.20.10.2" port=8033 ] -httpserver
+EventHandler evhr for sonar, obstacle;
+Context  ctxSensorEmitter  ip [ host="172.20.10.3" port=8133 ] //First sonar
+//Context  ctxSensorEmitter  ip [ host="172.20.10.4" port=8133 ] //Second sonar
+
+Context ctxRobot ip [ host="172.20.10.14"  port=8079 ]
+EventHandler evh for alarm, cmd;
+
+QActor radargui context ctxRadar {
+	  
+	Plan init normal  
+		actions[
+			println("RADAR init the GUI ... ");	
+			actorOp activateGui
+		]        
+		switchTo doWorkMsgs     
+	
+	Plan doWorkMsgs 
+		actions[
+			println("doWorkMsgs")
+		]
+		transition 
+		whenTime 86400000 -> doWorkMsgs
+		whenEvent sonar -> checkObstacle
+		
+	Plan checkObstacle
+		actions[
+			println("checkObstacle");
+			//R01 - shows the sonar data on the GUI
+			onEvent sonar : p(D,A) -> actorOp sendDataToGui(D,A)  
+		]  
+		//R02 - Evaluates the expression
+		reactive [?? p(D,A)] actorOp checkSonars(D,A) 
+		whenEnd -> doWorkMsgs
+		whenTout 55 -> doWorkMsgs
+		whenEvent cmd -> reset
+		or whenEvent alarm -> reset
+		or whenEvent usercmd -> reset
+		or whenEvent obstacle -> reset
+	
+	Plan reset 
+		actions[
+			println("Im in reset plan");
+			actorOp reset
+		]
+		transition
+		whenTime 86400000 -> reset
+		whenEvent cmd -> doWorkMsgs
+	
+}
+
+QActor alarmhandler context ctxRadar {
+	
+	Plan init normal
+		actions[
+			println("init alarmhandler")
+		]   
+		transition
+		whenTime 86400000 -> init
+		whenEvent alarm -> handleAlarm
+		
+	Plan handleAlarm
+		actions[
+			sound time(7000) file('./audio/alarm_sound.wav')
+		]
+		transition
+		whenTime 86400000 -> handleAlarm
+		whenEvent cmd -> init
+}
+
+QActor photoreceiver context ctxRadar {
+	
+	Plan init normal
+		actions[
+			actorOp connectAndSubscribe
+		] 
+		switchTo doWork
+		
+	Plan doWork
+		actions[
+			println("doWork")
+		]
+		transition 
+		whenTime 86400000 -> doWork
+		whenMsg photograph -> savePhoto
+    
+    //Receives and saves the photo received by the robot.
+	Plan savePhoto
+		actions[
+			onMsg photograph : ph(X) -> actorOp saveMqttPhoto(X); 
+        	println("Photo received")  
+		]
+		switchTo doWork
+}
+
+QActor sensorsonar context ctxSensorEmitter {
+	  
+	Rules {
+		mysonar( s1, coloryellow, "172.20.10.3" ).
+		//mysonar( s2, colorred, "172.20.10.4" ).      
+ 	
+		sonar(s1,330).
+		sonar(s2,30).
+    	setmyposition :- mysonar( SONAR, _, _ ), sonar( SONAR,POS ), assert( position( POS ) ).   
+	}
+
+	Plan init normal
+		actions[
+			println("sensorsonar STARTS");
+			actorOp startSonarC;
+    		demo setmyposition;
+    		[ !? position(POS) ] println(position(POS))
+		]
+		switchTo workReal
+    	 
+	Plan workReal 
+		actions[
+			[ !? position(POS) ] actorOp getDistanceFromSonar(POS);
+			[ ?? obstacledata( D,POS )] emit sonar : p(D,POS)
+		]
+		switchTo workReal
+}
+
+QActor robotsonar context ctxRobot {
+
+	Plan init normal
+		actions[
+			println("robotsonar STARTS");
+    		actorOp startSonarC
+    	]
+		switchTo workReal
+    	 
+	Plan workReal 
+		actions[
+			actorOp getDistanceFromSonar
+		]
+		switchTo workReal
+}
+
+Robot ioRobot QActor robot_actor context ctxRobot {
+            
+	Rules {           
+		tforward(5000).
+		tturnright(450).
+	    tturnleft(350).
+	 }
+	  
+	 Plan init normal 
+		actions [
+	    	actorOp connectToSend; 
+	      	actorOp createPi4jLed;
+	      	actorOp createPiCamera;
+	      	println("-------------");
+	      	println("ioRobot: A robot performs a move in reactive way"  );
+	      	println("-------------")
+	    ]
+	    switchTo startWalking
+	    
+	Plan startWalking
+		actions [
+	    	println("startWalking")
+		]
+	    reactive [!? tforward(T)] robotForward speed(60) time(T)
+	    whenEnd          	    -> startWalking
+	    whenTout 6000        	-> handleTout
+	    whenEvent reachedsensor -> reachedSensor
+	    or whenEvent obstacle   -> stopWalking
+	    or whenEvent cmd    	-> stopWalking
+	    or whenEvent alarm 		-> stopWalking
+	
+	/*
+	 * R04 - Stops the robot movement as soon as 
+	 * possible.
+	 * R05 - Makes it possible to restart the system
+	 * without restarting the software.
+	 */
+	Plan stopWalking
+		actions [
+	    	println("stopWalking");
+	    	robotStop speed(1) time(1)
+	    ]
+	    transition
+	    whenTime 86400000 -> stopWalking
+	    whenEvent cmd -> startWalking
+	
+	/*
+	 * R03 - When the robot reaches the area in front of
+	 *  a sonar, it makes a routine.
+	 */
+	Plan reachedSensor
+		actions [
+	    	println("reachedSensor");
+	    	//R03a - It first stops.
+	      	robotStop speed(1) time(1);
+	      	//R03b - Then rotates to its left of 90 degrees
+	      	[!? tturnleft(T)] robotLeft speed(60) time (T);
+	      	//R03c - Starts blinking a led put on the robot
+	      	actorOp startBlink;
+	      	delay time(1000);
+	      	//R03d - Takes a photo of the wall and sends to console with MQTT
+	      	actorOp sendMsgMqtt;
+	      	delay time(1000);
+	      	//R03e - Rotates to its right of 90 degrees to compensate the previous rotation
+	      	[!? tturnright(T)] robotRight speed(60) time (T);
+	      	delay time(1000);
+	      	//R03f - Stops the blinking of the led and continues its movement towards area B
+	      	actorOp stopBlink
+	    ] 
+	    switchTo startWalking
+	    
+    Plan handleTout
+    	actions [
+    		robotStop speed(1) time(1)
+    	]
+}    
