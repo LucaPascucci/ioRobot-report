@@ -6,9 +6,30 @@ Our work plan is set as follows:
 	\item find the main subsystems and define the system contexts;
 	\item define the structure of the events that can occur in the system;
 	\item define the structure of the messages exchanged by the actors;
-	\item define the main actors working in each context
+	\item define the main actors working in each context;
 	\item define the type of the logical interaction among the actors;
-	\item define the logical behaviour of each actor according to interaction constraints.
-	\item build and test the new system components (unit testing).
+	\item define the logical behaviour of each actor according to interaction constraints;
+	\item build and test the new system components (unit testing);
 	\item build and test the system (integration testing).
 \end{enumerate}
+After the problem analysis, a document called product backlog was defined, which defines the main issues to be solved to obtain a complete software product according to the requirements of the customer. Each issue was associated with a score from 1 to 5 that represents the cost to realize it  estimated by the members of the development team.\\
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{\textbf{Product Backlog}} \label{tab:title} 
+\end{minipage}
+\begin{tabular}{| c | p{9.5cm} | c |}
+\hline
+\textbf{Priority} & \textbf{Issue} &  \textbf{Score}\\ \hline
+1 & Robot goes forward and stops when its sonar notice an obstacle & 2 \\  \hline
+2 & Sonar reads and emits distance values to the radar & 1 \\  \hline
+3 & Radar displays sonar's values on GUI & 2 \\  \hline
+4 & Create user console and stop robot when user command is send & 2 \\ \hline
+5 & Robot stops when reach a sonar and starts its routine & 2 \\  \hline
+6 & Handle and blink robot Led &  1 \\ \hline
+7 & Robot captures photo and sends it and console saves it locally & 4 \\ \hline
+8 & Radar evaluates expression and plays alarm sound & 3 \\ \hline
+9 & User restart system without restarting software & 2 \\
+\hline
+\end{tabular}
+\\\\\\
+Product Backlog contains a limited number of items because the infrastructure used to realize the system allows to solve most of the issues discussed.
