@@ -52,7 +52,7 @@ QActor radargui context ctxRadar {
 
 	Plan reset
 		actions[
-			println("Sono nel piano reset");
+			println("Im in reset plan");
 			actorOp reset
 		]
 		transition
