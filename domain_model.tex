@@ -1,8 +1,22 @@
 \subsection{(Domain)model}
-\textbf{Structure} \\
+\textbf{Structure} \\\\
 The system includes three different kind of entities:
 \begin{itemize}
-	\item \textbf{Robot}: Receives commands from the user interface, can emit and sense events and can send messages.
-	\item \textbf{Sonar}: Emits the distances recorded under the form of events.
-	\item \textbf{Radar GUI}: Receives events  
+	\item \textbf{Robot}: reactive and atomic entity - Receives commands from the user interface, can emit and sense events and can send messages;
+	\item \textbf{Sonar}: proactive and atomic entity - Emits the distances values to the radar entity;
+	\item \textbf{Radar}: reactive, proactive and composed entity - Composed by 2 graphical interfaces, the first used to display sonar's distance values and the second to display user's command.
 \end{itemize}
+\textbf{Interaction} \\\\
+Requirements show the system's distributed and heterogeneous nature reason that no assumptions were made regarding the technology of the nodes. After several talks with the costumer, the following specifications also emerged: 
+\begin{itemize}
+	\item La comunicazione tra robot e remote interface è punto a punto.
+	\item Se l’operatore seleziona un comando e il robot non lo esegue allora l’operatore deve selezionare il comando nuovamente.
+	\item L’allarme è una comunicazione emessa dall’ASC e diretta ad un qualunque robot in ascolto.
+	\item La comunicazione tra robot e ASC per il trasferimento dei risultati della fase di detection è punto a punto.
+	\item I dati raccolti durante la fase di detection devono obbligatoriamente arrrivare all’ASC.
+	\item L’allarme è una comunicazione emessa dall’ASC e diretta ad un qualunque robot in ascolto.
+\end{itemize}
+L’interazione tra le entità che compongono il sistema può essere formalizzata mediante un diagramma di sequenza.
+TODO diagramma di sequenza
+\textbf{Behaviour} \\\\
+SOLO DELLE 3 ENTITà
