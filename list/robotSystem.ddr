@@ -15,7 +15,7 @@ EventHandler evhr for sonar, obstacle;
 Context ctxSensorEmitter ip [ host="172.20.10.3" port=8133 ] //First sonar
 //Context ctxSensorEmitter ip [ host="172.20.10.4" port=8133 ] //Second sonar
 
-Context ctxRobot ip [ host="172.20.10.14"  port=8079 ]
+Context ctxRobot ip [ host="172.20.10.5"  port=8079 ]
 EventHandler evh for alarm, cmd;
 
 QActor radargui context ctxRadar {
