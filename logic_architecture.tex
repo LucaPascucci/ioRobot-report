@@ -8,4 +8,4 @@ The logic architecture of a (distributed) software system can be specified by a 
 \end{itemize}
 Here is the logic architecture of the system described using qa language:
 \lstinputlisting[style=qa]{list/robotSystem.ddr}
-Our software house provided a software layer that transforms each sonar device into a source of events, as described by the QActor \textit{sensorsonar}. We decided to adopt it because it turned to be good for our needs. In addition to that, reusing an existing component has saved us time.
+Our software house provided a software layer that transforms the sonar device into a source of events, as described by the QActor \textit{sensorsonar}. This layer incorporates the principle of reuse because with simple changes is possible create several sonar,it is also independent from the system so even in the future it could have been used for other purposes. We decided to adopt it because it turned to be good for our needs. In addition to that, reusing an existing component has saved us time.
