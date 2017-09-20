@@ -16,3 +16,5 @@ The blink of the led has to be asynchronous, so that while the led is blinking, 
 For the photo shoot through the camera, we used an open source library found on Github, called \textbf{JRPiCam} which wraps the commands needed to take a photo. Once the photo is acquired, it is converted in a String encoded with \textbf{Base64} encoding and then published on the \textbf{MQTT} broker, with a specified topic. The radar running on PC will have to decode the String received through MQTT in order to rebuild the image and then save it locally.
 \lstinputlisting[style=java]{list/Camera.java}
 \lstinputlisting[style=java]{list/Photoreceiver.java}
+All the sonars, either on the path or on the robot, retreive the distances executing a C program called \lstinline[columns=fixed]{SonarAlone}, provided by the sofware house.
+\lstinputlisting[style=java]{list/Sensorsonar.java}
