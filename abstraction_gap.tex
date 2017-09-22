@@ -44,9 +44,9 @@ language instructions), every plan has its own logic and can switch to a differe
 plan. When the execution of a plan reaches its end it can specify if the
 previous plan must continue its execution or suspend it. This abstraction was
 lacking of the better part of message/event driven programming: reactivity. This
-gap is filled by Asynchronous Actions. Asynchronous Actions are tipically time
+gap is filled by Asynchronous Actions, which are tipically time
 consuming actions that can be executed in blocking or non-blocking way. When
-executing an asynchronous action its execution can be interrupted by specified
+runing an asynchronous action its execution can be interrupted by specified
 events and the QActor must react executing the associated plan. The logic of
 plan switching is defined as above. QActors are able to execute actions in two
 ways:
