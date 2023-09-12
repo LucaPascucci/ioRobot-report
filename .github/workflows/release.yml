@@ -1,4 +1,4 @@
-name: New release
+name: New release from tag
 on:
   push:
     # Sequence of patterns matched against refs/tags
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Github Action for LaTeX

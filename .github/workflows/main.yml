@@ -1,4 +1,4 @@
-name: Update master
+name: Update repo
 on:
   push:
     branches:
